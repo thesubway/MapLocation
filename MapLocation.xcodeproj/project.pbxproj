@@ -12,6 +12,7 @@
 		6D45AFDB19A2896900A3145B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D45AFD919A2896900A3145B /* Main.storyboard */; };
 		6D45AFDD19A2896900A3145B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D45AFDC19A2896900A3145B /* Images.xcassets */; };
 		6D45AFE919A2896A00A3145B /* MapLocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D45AFE819A2896A00A3145B /* MapLocationTests.swift */; };
+		6D45AFF519A2898200A3145B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D45AFF419A2898200A3145B /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,7 @@
 		6D45AFE219A2896A00A3145B /* MapLocationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapLocationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D45AFE719A2896A00A3145B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D45AFE819A2896A00A3145B /* MapLocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationTests.swift; sourceTree = "<group>"; };
+		6D45AFF419A2898200A3145B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D45AFF519A2898200A3145B /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +60,7 @@
 		6D45AFC719A2896800A3145B = {
 			isa = PBXGroup;
 			children = (
+				6D45AFF419A2898200A3145B /* MapKit.framework */,
 				6D45AFD219A2896900A3145B /* MapLocation */,
 				6D45AFE519A2896A00A3145B /* MapLocationTests */,
 				6D45AFD119A2896900A3145B /* Products */,
@@ -158,6 +162,11 @@
 				TargetAttributes = {
 					6D45AFCF19A2896900A3145B = {
 						CreatedOnToolsVersion = 6.0;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					6D45AFE119A2896A00A3145B = {
 						CreatedOnToolsVersion = 6.0;
