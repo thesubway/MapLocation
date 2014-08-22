@@ -14,6 +14,9 @@
 		6D45AFE919A2896A00A3145B /* MapLocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D45AFE819A2896A00A3145B /* MapLocationTests.swift */; };
 		6D45AFF519A2898200A3145B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D45AFF419A2898200A3145B /* MapKit.framework */; };
 		6D4A4AC119A4049C00DB2053 /* MapModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A4ABF19A4049C00DB2053 /* MapModel.xcdatamodeld */; };
+		6D4A4AC819A5424B00DB2053 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A4AC719A5424B00DB2053 /* Reminder.swift */; };
+		6D5B01B419A6E2B700083D5F /* RemindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5B01B319A6E2B700083D5F /* RemindersViewController.swift */; };
+		6D5B01B619A70FEA00083D5F /* AddReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5B01B519A70FEA00083D5F /* AddReminderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +41,10 @@
 		6D45AFE819A2896A00A3145B /* MapLocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationTests.swift; sourceTree = "<group>"; };
 		6D45AFF419A2898200A3145B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6D4A4AC019A4049C00DB2053 /* MapModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MapModel.xcdatamodel; sourceTree = "<group>"; };
+		6D4A4AC619A5424A00DB2053 /* MapLocation-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MapLocation-Bridging-Header.h"; sourceTree = "<group>"; };
+		6D4A4AC719A5424B00DB2053 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+		6D5B01B319A6E2B700083D5F /* RemindersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemindersViewController.swift; sourceTree = "<group>"; };
+		6D5B01B519A70FEA00083D5F /* AddReminderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddReminderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,10 +90,14 @@
 			children = (
 				6D45AFD519A2896900A3145B /* AppDelegate.swift */,
 				6D45AFD719A2896900A3145B /* ViewController.swift */,
+				6D5B01B319A6E2B700083D5F /* RemindersViewController.swift */,
+				6D5B01B519A70FEA00083D5F /* AddReminderViewController.swift */,
 				6D45AFD919A2896900A3145B /* Main.storyboard */,
 				6D45AFDC19A2896900A3145B /* Images.xcassets */,
 				6D4A4ABF19A4049C00DB2053 /* MapModel.xcdatamodeld */,
+				6D4A4AC719A5424B00DB2053 /* Reminder.swift */,
 				6D45AFD319A2896900A3145B /* Supporting Files */,
+				6D4A4AC619A5424A00DB2053 /* MapLocation-Bridging-Header.h */,
 			);
 			path = MapLocation;
 			sourceTree = "<group>";
@@ -223,6 +234,9 @@
 				6D4A4AC119A4049C00DB2053 /* MapModel.xcdatamodeld in Sources */,
 				6D45AFD819A2896900A3145B /* ViewController.swift in Sources */,
 				6D45AFD619A2896900A3145B /* AppDelegate.swift in Sources */,
+				6D4A4AC819A5424B00DB2053 /* Reminder.swift in Sources */,
+				6D5B01B619A70FEA00083D5F /* AddReminderViewController.swift in Sources */,
+				6D5B01B419A6E2B700083D5F /* RemindersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,9 +354,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = MapLocation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MapLocation/MapLocation-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -351,9 +368,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = MapLocation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MapLocation/MapLocation-Bridging-Header.h";
 			};
 			name = Release;
 		};

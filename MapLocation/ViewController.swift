@@ -24,9 +24,7 @@ class ViewController: UIViewController,UITextFieldDelegate,MKMapViewDelegate, CL
         switch CLLocationManager.authorizationStatus() as CLAuthorizationStatus {
         case .Authorized:
             println("authorized!")
-            //this status is for always requesting
             self.mapView.showsUserLocation = true
-//            self.locationManager.startUpdatingLocation()
             
         case .NotDetermined:
             println("initial launch")
@@ -55,6 +53,12 @@ class ViewController: UIViewController,UITextFieldDelegate,MKMapViewDelegate, CL
 //        var camera = MKMapCamera(lookingAtCenterCoordinate: ground, fromEyeCoordinate: eye, eyeAltitude: 50)
 //        self.mapView.camera = camera
         
+        //this part enables dropping of pin:
+        var longPress = UILongPressGestureRecognizer(target: self, action: "mapPressed:")
+        self.mapView.addGestureRecognizer(longPress)
+        
+        self.mapView.delegate = self
+        
         var pan = UIPanGestureRecognizer(target: self, action: "mapPanned:")
         self.view.addGestureRecognizer(pan)
     }
@@ -77,6 +81,67 @@ class ViewController: UIViewController,UITextFieldDelegate,MKMapViewDelegate, CL
         
     }
     
+    func mapPressed(sender : UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .Began:
+            println("Began")
+            //figuring out where they touched on the mapview
+            var touchPoint = sender.locationInView(self.mapView)
+            var touchCoordinate = self.mapView.convertPoint(touchPoint, toCoordinateFromView: self.mapView)
+            
+            //setting up our pin
+            var annotation = MKPointAnnotation()
+            annotation.coordinate = touchCoordinate
+            annotation.title = "Create your Reminder"
+            //now add coordinate to other view's tableView:
+            self.mapView.addAnnotation(annotation)
+            
+        case .Changed:
+            println("Changed")
+        case .Ended:
+            println("Ended")
+        default:
+            println("default")
+        }
+        
+    }
+    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        //very similar to tableview cell for row at index path
+        
+        //dequeue old one, just like cells
+        if let annotV = mapView.dequeueReusableAnnotationViewWithIdentifier("Pin") as? MKPinAnnotationView {
+            
+            //if we didnt get one back, create a new one with identifier
+            self.setupAnnotationView(annotV)
+            return annotV
+        }
+            
+        else {
+            
+            var annotV = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
+            self.setupAnnotationView(annotV)
+            return annotV
+        }
+    }
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        //tells us which annotation was clicked
+        var annotation = view.annotation
+        
+        var geoRegion = CLCircularRegion(center: annotation.coordinate, radius: 200, identifier: "Reminder")
+        self.locationManager.startMonitoringForRegion(geoRegion)
+        
+        println("Go to the add page.")
+        println(annotation.coordinate.latitude)
+        println(annotation.coordinate.longitude)
+        
+//        let remindersVC = self.storyboard.instantiateViewControllerWithIdentifier("remindersVC") as RemindersViewController
+//        self.navigationController.pushViewController(remindersVC, animated: true)
+        let addReminderVC = self.storyboard.instantiateViewControllerWithIdentifier("addReminder") as AddReminderViewController
+        self.navigationController.pushViewController(addReminderVC, animated: true)
+    }
+    
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status {
         case .Authorized:
@@ -86,7 +151,7 @@ class ViewController: UIViewController,UITextFieldDelegate,MKMapViewDelegate, CL
             self.locationManager.startMonitoringSignificantLocationChanges()
             
         case .Denied:
-            println("denied from map app using maps.")
+            println("denied from map app, using maps.")
         case .AuthorizedWhenInUse:
             println("said yes, and it's in use too")
             //show user location:
@@ -105,6 +170,21 @@ class ViewController: UIViewController,UITextFieldDelegate,MKMapViewDelegate, CL
         else {
             println()
         }
+    }
+    func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
+        println("did enter region")
+    }
+    
+    func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
+        println("did exit region")
+    }
+    
+    
+    func setupAnnotationView(annotationView : MKPinAnnotationView) {
+        annotationView.animatesDrop = true
+        annotationView.canShowCallout = true
+        var rightButton = UIButton.buttonWithType(UIButtonType.ContactAdd) as UIButton
+        annotationView.rightCalloutAccessoryView = rightButton
     }
     
     //ensure textfield leaves.
